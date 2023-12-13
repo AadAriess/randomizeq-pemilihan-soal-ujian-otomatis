@@ -1,0 +1,74 @@
+<!-- randomItems.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Items</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+  </head>
+  <body style="background-color: #ae9a7b" class="text-white">
+    <div class="container mt-3">
+      <h2 class="d-flex justify-content-center font-weight-bold mb-4 mt-2">
+        Quiz/Ujian
+      </h2>
+
+      <!-- Form untuk memilih jumlah item -->
+      <form action="/randomItems" method="post">
+        <label for="itemCount">Tentukan Banyak Soal yang Akan Diujikan :</label>
+        <select name="itemCount" id="itemCount">
+          <option value="2">2</option>
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <!-- Tambahkan opsi lain sesuai kebutuhan --></select
+        ><br />
+        <a href="/" class="btn btn-success mt-2 mb-4">Kembali</a>
+        <button type="submit" class="btn btn-dark mt-2 mb-4">Buat Soal</button>
+      </form>
+      <% if (items && items.length > 0) { %> <% let count = 1; %> <%
+      items.forEach(function(item) { %>
+      <!-- Tombol untuk menyimpan ke dalam tabel "Quiz" -->
+      <h5><%= count %>. <%= item.soal %></h5>
+      <p>A. <%= item.opta %></p>
+      <p>B. <%= item.optb %></p>
+      <p>C. <%= item.optc %></p>
+      <p>D. <%= item.optd %></p>
+      <p>E. <%= item.opte %></p>
+      <h6 class="font-weight-bold">
+        Tingkat Kesulitan : <%= item.tingkat_kesulitan %>
+      </h6>
+      <hr />
+      <% count++; %> <% }); %> <% } else { %>
+      <h2 class="mt-4 d-flex justify-content-center font-weight-bold">
+        Belum Ada Soal Dibuat.
+      </h2>
+      <% } %>
+
+      <!-- Tombol untuk menyimpan ke dalam tabel "Quiz" -->
+      <form
+        action="/addToQuiz"
+        method="post"
+        class="d-flex justify-content-center"
+      >
+        <input
+          type="hidden"
+          name="items"
+          value="<%= JSON.stringify(items) %>"
+        />
+        <label for="kodeQuiz">Kode Quiz:</label>
+        <input
+          type="text"
+          class="mr-2"
+          name="kodeQuiz"
+          autocomplete="off"
+          required
+        />
+        <button type="submit" class="btn btn-dark mt-3">Simpan ke Quiz</button>
+      </form>
+    </div>
+  </body>
+</html>

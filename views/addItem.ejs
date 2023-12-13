@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Item</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+  </head>
+  <body style="background-color: #ae9a7b" class="text-white">
+    <div class="container mt-3">
+      <h2 class="d-flex justify-content-center font-weight-bold mb-4 mt-2">
+        Tambah Soal
+      </h2>
+      <a href="/" class="btn btn-success mt-2 mb-4">Kembali</a>
+      <form action="/addItem" method="post">
+        <div class="col-12">
+          <!-- Input untuk kategori soal -->
+          <h4>KATEGORI SOAL</h4>
+          <label for="kategori_soal">Kategori Soal :</label>
+          <!-- Tambahkan opsi kosong di awal elemen select -->
+          <select
+            id="kategori_soal"
+            name="kategori_soal"
+            required
+            onchange="updateKategoriSoal()"
+          >
+            <option value="" disabled selected>Pilih Kategori Soal</option>
+            <% categories.forEach(category => { %>
+            <option value="<%= category.id %>">
+              <%= category.nama_kategori %>
+            </option>
+            <% }) %>
+          </select>
+          |
+          <!-- Input tambahan untuk kategori soal baru (jika diperlukan) -->
+          <label for="new_kategori_soal">Kategori Soal Baru :</label>
+          <input type="text" id="new_kategori_soal" name="new_kategori_soal" />
+          <!-- Input tersembunyi untuk menyimpan id kategori soal -->
+          <input
+            type="hidden"
+            id="hidden_kategori_soal_id"
+            name="hidden_kategori_soal_id"
+            value=""
+          />
+        </div>
+        <hr />
+        <div class="col-12">
+          <h4>PILIHAN GANDA</h4>
+          <label for="" class="form-label">Soal</label>
+          <input
+            type="text"
+            name="soal"
+            autocomplete="off"
+            class="form-control"
+            placeholder="Tuliskan Soal Anda"
+          />
+        </div>
+        <div class="col-12">
+          <label for="" class="form-label">Pilihan A</label>
+          <input
+            type="text"
+            name="opta"
+            autocomplete="off"
+            class="form-control"
+            placeholder="Tuliskan Jawaban Pilihan A"
+          />
+        </div>
+        <div class="col-12">
+          <label for="" class="form-label">Pilihan B</label>
+          <input
+            type="text"
+            class="form-control"
+            name="optb"
+            autocomplete="off"
+            placeholder="Tuliskan Jawaban Pilihan B"
+          />
+        </div>
+        <div class="col-12">
+          <label for="" class="form-label">Pilihan C</label>
+          <input
+            type="text"
+            class="form-control"
+            name="optc"
+            autocomplete="off"
+            placeholder="Tuliskan Jawaban Pilihan C"
+          />
+        </div>
+        <div class="col-12">
+          <label for="" class="form-label">Pilihan D</label>
+          <input
+            type="text"
+            class="form-control"
+            name="optd"
+            autocomplete="off"
+            placeholder="Tuliskan Jawaban Pilihan D"
+          />
+        </div>
+        <div class="col-12">
+          <label for="" class="form-label">Pilihan E</label>
+          <input
+            type="text"
+            class="form-control"
+            name="opte"
+            autocomplete="off"
+            placeholder="Tuliskan Jawaban Pilihan E"
+          />
+        </div>
+        <hr />
+        <div class="col-12">
+          <!-- Input untuk kunci jawaban (gunakan radio button) -->
+          <h4>KUNCI JAWABAN</h4>
+          <label
+            >Pilihan A
+            <input type="radio" name="kunci_jawaban" value="A" required />
+          </label>
+          |
+          <label
+            >Pilihan B
+            <input type="radio" name="kunci_jawaban" value="B" required />
+          </label>
+          |
+          <label
+            >Pilihan C
+            <input type="radio" name="kunci_jawaban" value="C" required />
+          </label>
+          |
+          <label
+            >Pilihan D
+            <input type="radio" name="kunci_jawaban" value="D" required />
+          </label>
+          |
+          <label
+            >Pilihan E
+            <input type="radio" name="kunci_jawaban" value="E" required />
+          </label>
+        </div>
+        <hr />
+        <div class="col-12">
+          <!-- Input untuk tingkat kesulitan soal -->
+          <h4>TINGKAT KESULITAN</h4>
+          <label for="tingkat_kesulitan">Tingkat Kesulitan Soal :</label>
+          <select id="tingkat_kesulitan" name="tingkat_kesulitan" required>
+            <option value="Mudah">Mudah</option>
+            <option value="Sulit">Sulit</option>
+          </select>
+        </div>
+        <div class="col-12 mt-2 d-flex justify-content-center">
+          <button type="submit" class="btn btn-success">Input Soal</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
+<script>
+  function updateKategoriSoal() {
+    var dropdown = document.getElementById("kategori_soal");
+    var selectedCategoryId = dropdown.options[dropdown.selectedIndex].value;
+
+    // Memasukkan nilai id kategori soal ke dalam input tersembunyi
+    document.getElementById("hidden_kategori_soal_id").value =
+      selectedCategoryId;
+  }
+</script>

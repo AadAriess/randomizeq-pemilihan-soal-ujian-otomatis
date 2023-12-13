@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Soal</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+  </head>
+  <body style="background-color: #ae9a7b" class="text-white">
+    <div class="container mt-3">
+      <h2 class="d-flex justify-content-center font-weight-bold mb-4 mt-2">
+        Edit Soal
+      </h2>
+      <a href="/" class="btn btn-success mt-2 mb-4">Kembali</a>
+      <form action="/updateItem/<%= item.id %>" method="post">
+        <div class="col-12">
+          <h4>KATEGORI SOAL</h4>
+          <!-- Input tersembunyi untuk ID kategori soal -->
+          <input type="hidden" name="hidden_kategori_soal_id" value="<%= item.kategori_soal_id %>">
+
+          <!-- Menampilkan nama kategori soal yang sudah ada -->
+          <label for="kategori_soal">Kategori Soal :</label>
+          <span><%= item.nama_kategori %></span> 
+
+          <!-- Pilihan untuk mengganti kategori soal -->
+          <label for="kategori_soal_baru">Pilih Kategori Soal Baru:</label>
+          <select id="kategori_soal_baru" name="kategori_soal_baru">
+            <% categories.forEach(category => { %>
+              <option value="<%= category.id %>" <%= category.id === item.kategori_soal_id ? 'selected' : '' %>>
+                <%= category.nama_kategori %>
+              </option>
+            <% }) %>
+          </select>
+        </div>
+        <hr>
+        <div class="col-12">
+          <h4>PILIHAN GANDA</h4>
+          <label for="" class="form-label">Soal</label>
+          <input
+            type="text"
+            name="soal"
+            class="form-control"
+            value="<%= item.soal %>"
+          />
+        </div>
+        <div class="col-12">
+          <label for="" class="form-label">Pilihan A</label>
+          <input
+            type="text"
+            name="opta"
+            class="form-control"
+            value="<%= item.opta %>"
+          />
+        </div>
+        <div class="col-12">
+          <label for="" class="form-label">Pilihan B</label>
+          <input
+            type="text"
+            class="form-control"
+            name="optb"
+            value="<%= item.optb %>"
+          />
+        </div>
+        <div class="col-12">
+          <label for="" class="form-label">Pilihan C</label>
+          <input
+            type="text"
+            class="form-control"
+            name="optc"
+            value="<%= item.optc %>"
+          />
+        </div>
+        <div class="col-12">
+          <label for="" class="form-label">Pilihan D</label>
+          <input
+            type="text"
+            class="form-control"
+            name="optd"
+            value="<%= item.optd %>"
+          />
+        </div>
+        <div class="col-12">
+          <label for="" class="form-label">Pilihan E</label>
+          <input
+            type="text"
+            class="form-control"
+            name="opte"
+            value="<%= item.opte %>"
+          />
+        </div>
+        <hr>
+        <div class="col-12">
+          <!-- Input untuk kunci jawaban -->
+          <h4>KUNCI JAWABAN</h4>
+          <label for="kunci_jawaban">Kunci Jawaban :</label>
+          <select id="kunci_jawaban" name="kunci_jawaban" required>
+            <option value="A" <%= item.kunci_jawaban === 'A' ? 'selected' : '' %>>A</option>
+            <option value="B" <%= item.kunci_jawaban === 'B' ? 'selected' : '' %>>B</option>
+            <option value="C" <%= item.kunci_jawaban === 'C' ? 'selected' : '' %>>C</option>
+            <option value="D" <%= item.kunci_jawaban === 'D' ? 'selected' : '' %>>D</option>
+            <option value="E" <%= item.kunci_jawaban === 'E' ? 'selected' : '' %>>E</option>
+            <!-- Tambahkan opsi untuk C, D, dan E sesuai kebutuhan -->
+          </select>
+        </div>
+        <hr>
+        <div class="col-12">
+          <!-- Input untuk tingkat kesulitan soal -->
+          <h4>TINGKAT KESULITAN</h4>
+          <label for="tingkat_kesulitan">Tingkat Kesulitan :</label>
+          <select id="tingkat_kesulitan" name="tingkat_kesulitan" required>
+            <option value="Mudah" <%= item.tingkat_kesulitan === 'Mudah' ? 'selected' : '' %>>Mudah</option>
+            <option value="Sulit" <%= item.tingkat_kesulitan === 'Sulit' ? 'selected' : '' %>>Sulit</option>
+          </select>
+        </div>
+        <div class="col-12 mt-2 d-flex justify-content-center">
+          <button type="submit" class="btn btn-success">Update Soal</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
